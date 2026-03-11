@@ -2,32 +2,57 @@
 import Header from './Header'
 import { useState, useRef } from 'react';
 import checkValid from '../utils/checkValid';
+import { auth } from '../utils/firebase';
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
-    
-    const [isSignInForm,setSignInForm] = useState(true);
-    const [errorMessage,seterrorMessage] = useState(null);
-    const toggleSiginForm = ()=>{
-       setSignInForm(!isSignInForm);
+
+    const [isSignInForm, setSignInForm] = useState(true);
+    const [errorMessage, seterrorMessage] = useState(null);
+    const toggleSiginForm = () => {
+        setSignInForm(!isSignInForm);
     }
-    
+
     const email = useRef(null);
     const password = useRef(null);
     const fullName = useRef(null);
-    const isFormValid=()=>{
-        // console.log(email.current.value)
-   
-   if(isSignInForm){
-    const message = checkValid(email.current.value,password.current.value);
-    seterrorMessage(message);
-   }
-    
-    if(!isSignInForm){
-        const message = checkValid(email.current.value,password.current.value,fullName.current.value);
-        checkValid(email.current.value,password.current.value,fullName.current.value)
-            seterrorMessage(message);
+    const isFormValid = () => {
+        const message = checkValid(email.current.value, password.current.value);
+        seterrorMessage(message);
+        if (message) return;
 
-    }
+        //sign up logic
+        if (!isSignInForm) {
+
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    console.log(user);
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    seterrorMessage(errorCode + " - " + errorMessage);
+                    // ..
+                });
+        }
+        else {
+            // sign in logic
+            signInWithEmailAndPassword(auth,email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                     console.log(user);
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                       seterrorMessage(errorCode + " - " + errorMessage);
+                });
+        }
 
     }
     return (
@@ -36,15 +61,15 @@ const Login = () => {
             <div className='absolute'>
                 <img className="" src='https://assets.nflxext.com/ffe/siteui/vlv3/75772f65-58b5-465f-b642-fa858b6168ca/web/IN-en-20260302-TRIFECTA-perspective_26418256-c5f3-4e9a-8160-a6b534228a2f_large.jpg' alt='Background image'></img>
             </div>
-                <form onSubmit={(e)=>e.preventDefault()} className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
-                <h1 className='text-3xl font-bold'>{isSignInForm? "Sign In" : "Sign Up"}</h1>
-                 {!isSignInForm && <input ref={fullName} className="font-bold  text-xl p-4 my-4 w-full bg-gray-700 " type='text' placeholder='Full Name'/>}
-                    <input ref={email} className="font-bold  text-xl p-4 my-4 w-full bg-gray-700" type='text' placeholder='Email '/>
-                    <input ref={password} className="font-bold  text-xl p-4 my-4 w-full bg-gray-700 " type='password' placeholder='Password'/>
-                    <p className='font-bold text-red-500'  >{errorMessage}</p>
-                    <button onClick={isFormValid} className=" font-bold  text-xl bg-red-700 p-4 my-4 w-full cursor-pointer">{isSignInForm? "Sign In" : "Sign Up"}</button>
-                    <p className='font-bold  text-xl cursor-pointer' onClick={toggleSiginForm} >{isSignInForm ? "New to Netflix? Sign Up Now" : "Already registered? Sign In Now"}</p>
-                </form>
+            <form onSubmit={(e) => e.preventDefault()} className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
+                <h1 className='text-3xl font-bold'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
+                {!isSignInForm && <input ref={fullName} className="font-bold  text-xl p-4 my-4 w-full bg-gray-700 " type='text' placeholder='Full Name' />}
+                <input ref={email} className="font-bold  text-xl p-4 my-4 w-full bg-gray-700" type='text' placeholder='Email ' />
+                <input ref={password} className="font-bold  text-xl p-4 my-4 w-full bg-gray-700 " type='password' placeholder='Password' />
+                <p className='font-bold text-red-500'  >{errorMessage}</p>
+                <button onClick={isFormValid} className=" font-bold  text-xl bg-red-700 p-4 my-4 w-full cursor-pointer">{isSignInForm ? "Sign In" : "Sign Up"}</button>
+                <p className='font-bold  text-xl cursor-pointer' onClick={toggleSiginForm} >{isSignInForm ? "New to Netflix? Sign Up Now" : "Already registered? Sign In Now"}</p>
+            </form>
         </div>
     )
 }
