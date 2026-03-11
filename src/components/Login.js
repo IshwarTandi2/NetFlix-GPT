@@ -31,7 +31,7 @@ const Login = () => {
 
     }
     return (
-        <div className="Log in page" >
+        <div className="Log-in-page" >
             <Header />
             <div className='absolute'>
                 <img className="" src='https://assets.nflxext.com/ffe/siteui/vlv3/75772f65-58b5-465f-b642-fa858b6168ca/web/IN-en-20260302-TRIFECTA-perspective_26418256-c5f3-4e9a-8160-a6b534228a2f_large.jpg' alt='Background image'></img>
