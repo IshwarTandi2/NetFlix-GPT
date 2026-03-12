@@ -1,11 +1,29 @@
 import React from 'react'
+import { auth } from '../utils/firebase'
+import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
-  return (
-    <div className="Header w-full absolute bg-gradient-to-b from-black z-10">
-        <img className='ml-[200px]' width={280}  src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2026-02-12/consent/87b6a5c0-0104-4e96-a291-092c11350111/019ae4b5-d8fb-7693-90ba-7a61d24a8837/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png" alt='logo' ></img>
+  const navigate = useNavigate();
+  const handleSignOut = () =>{ signOut(auth).then(() => {
+          // Sign-out successful.
+         navigate("/");
 
-        
+        }).catch((error) => {
+          // An error happened.
+         
+        })
+      }
+  
+  return (
+    <div className="Header flex justify-between w-full absolute bg-gradient-to-b from-black z-10">
+      <div>  <img className='ml-[200px]' width={280} src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png" alt='logo' ></img>
+      </div>
+      <div className='flex mr-20'>
+        <img className=' w-12 h-12 my-9 mx-3 rounded-md ' src='https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdpkabKqQAxyWzo6QW_ZnPz1IZLqlmNfK-t4L1VIeV1DY00JhLo_LMVFp936keDxj-V5UELAVJrU--iUUY2MaDxQSSO-0qw.png?r=e6e'></img>
+        <button onClick={handleSignOut} className=' font-bold text-white text-lg'>(Sign Out)</button>
+      </div>
+
     </div>
   )
 }
