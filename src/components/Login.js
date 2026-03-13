@@ -4,10 +4,11 @@ import { useState, useRef } from 'react';
 import checkValid from '../utils/checkValid';
 import { auth } from '../utils/firebase';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { BACKGROUND_URL } from '../utils/constants';
+
 
 const Login = () => {
-     const navigate = useNavigate();
+   
     const [isSignInForm, setSignInForm] = useState(true);
     const [errorMessage, seterrorMessage] = useState(null);
     const toggleSiginForm = () => {
@@ -29,7 +30,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                        navigate("/Browse");
+                     
 
                     
                     // ...
@@ -47,7 +48,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                         navigate("/Browse");
+                         
 
                     // ...
                 })
@@ -63,7 +64,7 @@ const Login = () => {
         <div className="Log-in-page" >
             <Header />
             <div className='absolute'>
-                <img className="" src='https://assets.nflxext.com/ffe/siteui/vlv3/75772f65-58b5-465f-b642-fa858b6168ca/web/IN-en-20260302-TRIFECTA-perspective_26418256-c5f3-4e9a-8160-a6b534228a2f_large.jpg' alt='Background image'></img>
+                <img className="" src={BACKGROUND_URL} alt='Background image'></img>
             </div>
             <form onSubmit={(e) => e.preventDefault()} className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
                 <h1 className='text-3xl font-bold'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
