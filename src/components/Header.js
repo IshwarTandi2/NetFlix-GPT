@@ -28,7 +28,7 @@ const Header = () => {
     // User is signed in,  
   
     const {uid,email} = user;
-     console.log(user);
+     
     dispatch(addUser({uid:uid, email:email}));
    
      // navigate browse
@@ -49,7 +49,7 @@ const Header = () => {
     },[])
   
   return (
-    <div className="Header flex justify-between w-full absolute bg-gradient-to-b from-black z-10">
+    <div className="absolute w-screen flex justify-between  absolute bg-gradient-to-b from-black  z-10">
       <div>  <img className='ml-[200px]' width={280} src={LOGO_URL} alt='logo' ></img>
       </div>
       <div className='flex mr-20'>
