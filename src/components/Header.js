@@ -49,7 +49,7 @@ const Header = () => {
     },[])
   
   return (
-    <div className="absolute w-screen flex justify-between  absolute bg-gradient-to-b from-black  z-10">
+    <div className="absolute w-screen px-8 py-2 flex justify-between    z-10">
       <div>  <img className='ml-[200px]' width={280} src={LOGO_URL} alt='logo' ></img>
       </div>
       <div className='flex mr-20'>
