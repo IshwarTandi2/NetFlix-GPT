@@ -13,3 +13,5 @@
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYmMyNWM4ZTVlYmIzZTg1ZTlmZGQ1MjQwZDM4NDI0NCIsIm5iZiI6MTc3MzMzNzM5Mi4yNjEsInN1YiI6IjY5YjJmYjMwOTlhYWEwMDczZTAyYzI0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.08VtoYDZCJEwhpnfIVw8mVckJEoikDI1BsN6WM5NN08'
   }
 };
+
+export const MOVIECARD_IMG_URL = "https://image.tmdb.org/t/p/w500";

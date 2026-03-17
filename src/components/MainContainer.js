@@ -18,4 +18,4 @@ return (
   );
 };
 
-export default MainContainer
+export default MainContainer;
