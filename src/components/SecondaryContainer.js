@@ -4,12 +4,12 @@ import Movielist from './Movielist';
 
 const SecondaryContainer = () => {
  
-  const movies = useSelector((store)=>store.movie.nowPlayingMovie);
-  console.log(movies[0]);
+  const movies = useSelector((store)=>store.movie);
+  
   return (
     <div>{
       //MovieList - Now Playing movie
-      <Movielist title={"Now Playing Movies"} movies={movies} />
+      <Movielist title={"Now Playing Movies"} movies={movies.nowPlayingMovie} />
       //MovieList - Trending movie
       //MovieList - Most Popular movie
     }</div>
