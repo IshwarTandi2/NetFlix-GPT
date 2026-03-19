@@ -5,7 +5,7 @@ import Movielist from './Movielist';
 const SecondaryContainer = () => {
  
   const movies = useSelector((store)=>store.movie.nowPlayingMovie);
-  console.log(movies);
+  console.log(movies[0]);
   return (
     <div>{
       //MovieList - Now Playing movie
