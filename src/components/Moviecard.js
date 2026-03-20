@@ -1,10 +1,10 @@
 import React from 'react'
 import { MOVIECARD_IMG_URL } from '../utils/constants'
 
-const Moviecard = ({posterPath}) => {
+const Moviecard = ({posterpath}) => {
   return (
     <div className='w-48'>
-        <img alt='Movie card' src={MOVIECARD_IMG_URL+posterPath}></img>
+        <img alt='Movie card' src={MOVIECARD_IMG_URL+posterpath}></img>
     </div>
   )
 }
